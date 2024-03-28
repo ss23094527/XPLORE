@@ -9,17 +9,17 @@ import StartScreen from './App/Screen/StartScreen';
 import Navigation from './Navigation/TavNavigation'; 
 import { auth } from './firebase'; 
 
+
 export default function App() {
   const Stack = createStackNavigator();
   const [fontsLoaded, fontError] = useFonts({
     'DelaGothicOne': require('./assets/fonts/DelaGothicOne-Regular.ttf'),
-    'NotoSansTC': require('./assets/fonts/NotoSansTC-VariableFont_wght.ttf'),
     'Outfit': require('./assets/fonts/Outfit-Light.ttf'),
     'Roboto': require('./assets/fonts/Roboto-Bold.ttf'),
-    'DotGothic': require('./assets/fonts/DotGothic16-Regular.ttf'),
+    'KiwiMaru-Regular': require('./assets/fonts/KiwiMaru-Regular.ttf'),
   });
   
-  // 監聽使用者的登入狀態
+ 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
@@ -30,7 +30,7 @@ export default function App() {
         navigation.navigate('StartScreen');
       }
     });
-    // 組件卸載時取消訂閱
+    
     return unsubscribe;
   }, []);
 

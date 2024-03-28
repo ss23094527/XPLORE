@@ -11,17 +11,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View  style={styles.container}>
-        <LottieView
-      source={require("../../animations/Animation - 1711464382456.json")}
-      style={{width: "100%", height: "100%"}}
-      autoPlay
-      loop
-    />
-        <LottieView 
-        source={require('../../animations/robotanim.json')} 
-        autoPlay
-        />
-
+      <Text>HOME</Text>
         
       </View>
     )
