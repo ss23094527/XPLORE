@@ -13,7 +13,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigation = useNavigation(); // 使用 useNavigation 鉤子獲取導航功能
+  const navigation = useNavigation(); 
 
   const handleLogin = () => {
     if (!email || !password) {

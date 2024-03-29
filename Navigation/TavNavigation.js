@@ -9,9 +9,14 @@ import LearnAIScreen from '../App/Screen/LearnAIScreen';
 import { LinearGradient } from 'expo-linear-gradient';
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
-
+import { FontAwesome } from '@expo/vector-icons';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { COLORS } from '../theme';
 
 const Tab = createBottomTabNavigator();
+
+const Drawer = createDrawerNavigator();
+
 
 export default class TavNavigation extends Component {
   constructor(props) {
@@ -21,11 +26,9 @@ export default class TavNavigation extends Component {
     };
   }
 
-  handleTabPress = (index) => {
+  handlePress = (index) => {
     const { bgPosition } = this.state;
-    // 计算背景位置
-    const position = index * 76; // 假设每个选项卡宽度为100
-    // 执行动画
+    const position = index * 76;
     Animated.timing(bgPosition, {
       toValue: position,
       duration: 400,
@@ -37,38 +40,91 @@ export default class TavNavigation extends Component {
     const { bgPosition } = this.state;
 
     return (
-      <View style={styles.container}>
-        <Tab.Navigator
-          screenOptions={{
-            headerShown: false,
-            tabBarStyle: {
-              position: 'absolute',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 60,
-              bottom: 16,
-              right: 16,
-              left: 16,
-              borderRadius: 20,
-              backgroundColor: '#FFFFFF',
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: -1,
-              },
-              shadowOpacity: 0.27,
-              shadowRadius: 4.65,
-              elevation: 6,
-              paddingBottom: 10,
+      <Drawer.Navigator 
+      
+      screenOptions={{ 
+        headerShown: false 
+       
+      }}
+      drawerContent={props => <CustomDrawerContent {...props} />}
+      >
+        <Drawer.Screen name=" ">
+          {props => <TabNavigation {...props} bgPosition={this.state.bgPosition} handlePress={this.handlePress} />}
+        </Drawer.Screen>
+      </Drawer.Navigator>
+    );
+  }
+}
+
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}  >
+      <View style={styles.drawerContainer}>
+     
+        <DrawerItem
+          label="Home"
+          onPress={() => props.navigation.navigate('Home')}
+        />
+        <DrawerItem
+          label="Category"
+          onPress={() => props.navigation.navigate('Category')}
+        />
+        <DrawerItem
+          label="AI"
+          onPress={() => props.navigation.navigate('AI')}
+        />
+        <DrawerItem
+          label="Like"
+          onPress={() => props.navigation.navigate('Like')}
+        />
+        <DrawerItem
+          label="Profile"
+          onPress={() => props.navigation.navigate('Profile')}
+        />
+      </View>
+    </DrawerContentScrollView>
+  );
+}
+
+function TabNavigation({ navigation, bgPosition, handlePress }) {
+  return (
+    <View style={styles.container}>
+       {/* DrawerButton */}
+       <TouchableOpacity style={styles.drawerIconContainer} onPress={() => navigation.openDrawer()}>
+       <Image source={require('../assets/images/drawer.png')} style={styles.drawerIcon} />
+      </TouchableOpacity>
+
+      {/* TabNavigator */}
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 60,
+            bottom: 16,
+            right: 16,
+            left: 16,
+            borderRadius: 20,
+            backgroundColor: '#FFFFFF',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: -1,
             },
-          }}
-        >
-          <Tab.Screen
+            shadowOpacity: 0.27,
+            shadowRadius: 4.65,
+            elevation: 6,
+            paddingBottom: 10,
+          },
+        }}>
+        <Tab.Screen
             name="首頁"
             component={HomeScreen}
             options={{
               tabBarButton: ({ onPress, accessibilityState }) => (
-                <TouchableOpacity onPress={() => { onPress(); this.handleTabPress(0); }} activeOpacity={1} style={styles.tabBarButton}>
+                <TouchableOpacity onPress={() => { onPress(); handlePress(0); }} activeOpacity={1} style={styles.tabBarButton}>
                    <Animated.View style={[styles.gradientContainer, { left: bgPosition }]}>
                       <LinearGradient
                         colors={['#006BF9', '#01C2E0', '#60FEF9']}
@@ -105,7 +161,7 @@ export default class TavNavigation extends Component {
             component={CategoryScreen}
             options={{
               tabBarButton: ({ onPress, accessibilityState }) => (
-                <TouchableOpacity onPress={() => { onPress(); this.handleTabPress(1); }} activeOpacity={1} style={styles.tabBarButton}>
+                <TouchableOpacity onPress={() => { onPress(); handlePress(1); }} activeOpacity={1} style={styles.tabBarButton}>
                   <Animatable.View
                     style={[
                       styles.tabBarButtonContainer,
@@ -132,7 +188,7 @@ export default class TavNavigation extends Component {
             component={LearnAIScreen}
             options={{
               tabBarButton: ({ onPress, accessibilityState }) => (
-                <TouchableOpacity onPress={() => { onPress(); this.handleTabPress(2); }} activeOpacity={1} style={styles.tabBarButton}>
+                <TouchableOpacity onPress={() => { onPress(); handlePress(2); }} activeOpacity={1} style={styles.tabBarButton}>
                   
                   <Animatable.View
                     style={[
@@ -159,7 +215,7 @@ export default class TavNavigation extends Component {
             component={LikeScreen}
             options={{
               tabBarButton: ({ onPress, accessibilityState }) => (
-                <TouchableOpacity onPress={() => { onPress(); this.handleTabPress(3); }} activeOpacity={1} style={styles.tabBarButton}>
+                <TouchableOpacity onPress={() => { onPress(); handlePress(3); }} activeOpacity={1} style={styles.tabBarButton}>
                   <Image
                       source={require('../assets/images/favorite.png')}
                       style={[styles.icon, accessibilityState.selected && styles.iconActive]}
@@ -176,7 +232,7 @@ export default class TavNavigation extends Component {
             component={ProfileScreen}
             options={{
               tabBarButton: ({ onPress, accessibilityState }) => (
-                <TouchableOpacity onPress={() => { onPress(); this.handleTabPress(4); }} activeOpacity={1} style={styles.tabBarButton}>
+                <TouchableOpacity onPress={() => { onPress(); handlePress(4); }} activeOpacity={1} style={styles.tabBarButton}>
                  <Image
                       source={require('../assets/images/profile.png')}
                       style={[styles.icon, accessibilityState.selected && styles.iconActive]}
@@ -188,10 +244,11 @@ export default class TavNavigation extends Component {
               ),
             }}
           />
-        </Tab.Navigator>
-      </View>
-    );
-  }
+        {/* Add other Tab.Screen components for Category, AI, Like, and Profile */}
+
+      </Tab.Navigator>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -211,14 +268,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    width: 28,
-    height: 28,
+    marginTop: 10,
+    width: 30,
+    height: 30,
     tintColor: '#888',
   },
   tabBarText: {
     fontSize: 12,
     color: '#888',
-    fontFamily: 'KiwiMaru-Regular', 
+    fontFamily: 'KiwiMaru-Regular',
   },
   tabBarActiveText: {
     color: '#fff',
@@ -227,12 +285,11 @@ const styles = StyleSheet.create({
     tintColor: '#fff',
   },
   gradientContainer: {
-    
     position: 'absolute',
     top: 0,
     bottom: 0,
     height: 60,
-    width: '100%', // 宽度为两倍屏幕宽度，以确保在动画中无缝连接
+    width: '100%',
     zIndex: -1,
   },
   gradient: {
@@ -241,4 +298,26 @@ const styles = StyleSheet.create({
     flex: 1,
     zIndex: -1,
   },
+  drawerContent: {
+    flex: 1,
+  },
+  drawerContainer: {
+    flex: 1,
+  
+  },
+
+  drawerIcon: {
+    width: 30,
+    height: 30,
+    tintColor: '#FFFFFF', 
+  },
+
+  drawerIconContainer: {
+    position: 'absolute',
+    padding:10,
+    top: 16,
+    left: 16,
+    zIndex: 10,
+  },
+  
 });
