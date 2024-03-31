@@ -1,6 +1,133 @@
 [
-    { "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel01.png" },
-    { "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel02.png" },
-    { "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png" }
-  ]
+  {
+    "title": "幻燈片",
+    "horizontal": true,
+    "data": [
+      {
+        "title": "Carousel 1",
+        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel02.png"
+      },
+      {
+        "title": "Carousel 1",
+        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel01.png"
+      },
+      {
+        "title": "Carousel 1",
+        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+      }
+    ]
+  },
+
+  {
+    "title": "熱門推薦",
+    "horizontal": true,
+    "data": [
+      {
+        "title": "Blnder3.2:零基礎新手入門",
+        "author":"wen yi jie",
+        "stars":"5.0",
+        "comment":"(2,402)",
+        "price":"$1990 NTD",
+        "image": "https://img.onl/HJCby5"
+      },
+      {
+        "title": "Blnder3D:次世代遊戲建模:基礎篇",
+        "author":"chen yi cheng",
+        "stars":"4.7",
+        "comment":"(1,652)",
+        "price":"FREE",
+        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+      },
+      {
+        "title": "Carousel 1",
+        "author":"yiyi",
+        "score": "4.6",
+        "stars": 5,
+        "comment":"(2,002)",
+        "price":"$690 NTD",
+        "image": "https://img.onl/s457yb"
+      },
+      {
+        "title": "Carousel 1",
+        "author":"quxin",
+        "score": "4.6",
+        "stars": 5,
+        "comment":"(1,902)",
+        "price":"FREE",
+        "image": "https://img.onl/s457yb"
+      }
+    ]
+  },
+
+  {
+    "title": "最新上架",
+    "horizontal": false,
+    "data": [
+      {
+        "title": "Unreal Engine 5 :《末日廢墟》",
+        "author":"wen yi jie",
+        "score": "4.6",
+        "stars": 3,
+        "comment":"(22)",
+        "price":"FREE",
+        "image": "https://img.onl/s457yb"
+      },
+      {
+        "title": "React JS | Best React JS Course",
+        "author":"wen yi jie",
+        "score": "4.6",
+        "stars": 4,
+        "comment":"(102)",
+        "price":"FREE",
+        "image": "https://img.onl/yxkDW8"
+      },
+      {
+        "title": "Carousel 1",
+        "author":"wen yi jie",
+        "score": "4.6",
+        "stars": 5,
+        "comment":"(334)",
+        "price":"FREE",
+        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+      },
+      {
+        "title": "Carousel 1",
+        "author":"quxin",
+        "score": "4.6",
+        "stars": 5,
+        "comment":"(522)",
+        "price":"FREE",
+        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+      }
+    ]
+  },
+  {
+    "title": "課程分類",
+    "horizontal": true,
+    "data": [
+      {
+        "title": "遊戲設計",
+        "image": "https://img.onl/FH0e2D"
+      },
+      {
+        "title": "網頁開發",
+
+        "image": "https://img.onl/Y9CgOg"
+      },
+      {
+        "title": "3D建模",
+        "image": "https://img.onl/gAyptl"
+      },
+      {
+        "title": "CG動畫",
+        "image": "https://img.onl/rWw9pL"
+      },
+      {
+        "title": "平面設計",
+        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+      }
+    ]
+  }
   
+
+]
