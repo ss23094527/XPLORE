@@ -7,7 +7,7 @@ import LoginScreen from './LoginScreen';
 import RegiScreen from './RegiScreen';
 import HomeScreen from './HomeScreen';
 import APP from '../../App';
-
+import Animated,{FadeIn,FadeInDown,FadeInUp,FadeOut} from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +28,7 @@ export default class StartScreen extends Component {
 class StartScreenContent extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <Animated.View entering={FadeInUp.delay(200).duration(1000).springify()} style={styles.container}>
         <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
           <Image source={logo} style={styles.logo}></Image>
           <Text style={styles.Text}>   探索你的學習領域，開啟新世界。</Text>
@@ -36,7 +36,7 @@ class StartScreenContent extends Component {
             <Text style={styles.buttonText}>Let's GO!</Text>
           </TouchableOpacity>
         </ImageBackground>
-      </View>
+      </Animated.View>
     );
   }
 }

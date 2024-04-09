@@ -40,7 +40,7 @@ const SearchComponent = () => {
 const styles = StyleSheet.create({
   searchContainer: {
     
-    width: 300,
+    width: 'auto',
     flexDirection: 'row',
     alignItems: 'center',
     marginTop:50,

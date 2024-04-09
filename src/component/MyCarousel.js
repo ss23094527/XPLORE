@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import carouselData from '../../src/json/carouselData.json'; 
+import { COLORS } from '../../theme';
 
 const MyCarousel = () => {
   const carouselRef = useRef();
@@ -10,8 +11,11 @@ const MyCarousel = () => {
 
   const renderCarouselItem = ({ item, index }) => {
     return (
+      
       <View style={styles.slide}>
+  
         <Image source={{ uri: item.image }} style={styles.image} />
+      
       </View>
     );
   };
@@ -40,12 +44,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 19,
     overflow: 'hidden', 
+    elevation: 5, 
   },
   image: {
     width: '100%',
     height: '110%',
     resizeMode: 'cover', 
   },
+  title:{
+    color:COLORS.white,
+    fontSize:20,
+    zIndex:1,
+  }
 });
 
 export default MyCarousel;

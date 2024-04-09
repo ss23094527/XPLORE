@@ -1,8 +1,36 @@
 // firebase.js
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged   } from 'firebase/auth';
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+
+const getCurrentUser = () => {
+  const auth = getAuth();
+  const db = getFirestore();
+  return new Promise((resolve, reject) => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+      
+        const usersRef = collection(db, 'users');
+        const q = query(usersRef, where('uid', '==', user.uid)); // 將這裡的 'userId' 改為 'uid'
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          const userData = {
+            username: doc.data().username,
+            email: user.email,
+          
+          };
+          resolve(userData);
+        });
+      } else {
+        reject(new Error('No user logged in'));
+      }
+    });
+  });
+};
+
+export { getCurrentUser };
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyC0-zoZqLg8dTlKHDPZU8xaAHZj8rrIc8U",
@@ -19,5 +47,4 @@ const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp, "gs://xplore-72e89.appspot.com");
 
-
-export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword,db, storage};
+export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, db, storage };

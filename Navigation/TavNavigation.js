@@ -13,17 +13,30 @@ import { FontAwesome } from '@expo/vector-icons';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { COLORS } from '../theme';
 
+import { getCurrentUser } from '../firebase.js';
+
+
 const Tab = createBottomTabNavigator();
 
 const Drawer = createDrawerNavigator();
 
 
 export default class TavNavigation extends Component {
+
+  
+
   constructor(props) {
     super(props);
     this.state = {
       bgPosition: new Animated.Value(0),
+      user: null, // 添加用戶狀態以保存當前用戶
     };
+  }
+
+  componentDidMount() {
+   
+    const currentUser = getCurrentUser();
+    this.setState({ user: currentUser });
   }
 
   handlePress = (index) => {
@@ -37,16 +50,14 @@ export default class TavNavigation extends Component {
   };
 
   render() {
-    const { bgPosition } = this.state;
+    const { bgPosition, user } = this.state;
 
     return (
       <Drawer.Navigator 
-      
-      screenOptions={{ 
-        headerShown: false 
-       
-      }}
-      drawerContent={props => <CustomDrawerContent {...props} />}
+        screenOptions={{ 
+          headerShown: false 
+        }}
+        drawerContent={props => <CustomDrawerContent {...props} user={user} />}
       >
         <Drawer.Screen name=" ">
           {props => <TabNavigation {...props} bgPosition={this.state.bgPosition} handlePress={this.handlePress} />}
@@ -56,33 +67,37 @@ export default class TavNavigation extends Component {
   }
 }
 
-function CustomDrawerContent(props) {
+function CustomDrawerContent({ navigation, user }) {
   return (
-    <DrawerContentScrollView {...props}  >
-      <View style={styles.drawerContainer}>
-     
+    <View style={styles.drawerContainer}>
+      {/* 添加用戶名稱和頭像 */}
+      {user && (
+        <View style={styles.userInfoContainer}>
+          <Image source={{ uri: user.photoURL }} style={styles.userAvatar} />
+          <Text style={styles.userName}>{user.name}</Text>
+        </View>
+      )}
+
+      
+      <DrawerContentScrollView>
         <DrawerItem
-          label="Home"
-          onPress={() => props.navigation.navigate('Home')}
+          label="個人檔案"
+          onPress={() => navigation.navigate('Profile')}
         />
         <DrawerItem
-          label="Category"
-          onPress={() => props.navigation.navigate('Category')}
+          label="設定"
+          onPress={() => navigation.navigate('Settings')}
         />
         <DrawerItem
-          label="AI"
-          onPress={() => props.navigation.navigate('AI')}
+          label="願望清單"
+          onPress={() => navigation.navigate('Wishlist')}
         />
         <DrawerItem
-          label="Like"
-          onPress={() => props.navigation.navigate('Like')}
+          label="登出"
+          onPress={() => navigation.navigate('Login')}
         />
-        <DrawerItem
-          label="Profile"
-          onPress={() => props.navigation.navigate('Profile')}
-        />
-      </View>
-    </DrawerContentScrollView>
+      </DrawerContentScrollView>
+    </View>
   );
 }
 
@@ -307,6 +322,8 @@ const styles = StyleSheet.create({
   },
 
   drawerIcon: {
+    marginTop:10,
+    marginBottom:10,
     width: 30,
     height: 30,
     tintColor: '#FFFFFF', 
@@ -319,5 +336,23 @@ const styles = StyleSheet.create({
     left: 16,
     zIndex: 10,
   },
-  
+  userInfoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  userAvatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  userName: {
+    color:COLORS.black,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });

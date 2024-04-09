@@ -7,6 +7,9 @@ import app from './../../assets/images/loginGradient.png';
 import LOGO from './../../assets/images/logo.png';
 import Google from './../../assets/images/google.png';
 import facebook from './../../assets/images/Facebook.png';
+import Animated,{FadeIn,FadeInDown,FadeInUp,FadeOut} from 'react-native-reanimated';
+
+
 
 const RegiScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -49,7 +52,7 @@ const RegiScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ImageBackground source={app} style={styles.backgroundImage}>
         <View style={styles.logoContainer}>
-          <Image source={LOGO} style={styles.logo} />
+          <Animated.Image ntering={FadeInUp.delay(200).duration(1000).springify()} source={LOGO} style={styles.logo} />
         </View>
         <Card style={styles.card}>
           <Text style={styles.welcomeText}>歡迎註冊 X-Plore APP!</Text>

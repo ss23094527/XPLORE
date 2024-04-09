@@ -8,6 +8,7 @@ import Google from './../../assets/images/google.png';
 import facebook from './../../assets/images/Facebook.png';
 import { useNavigation } from '@react-navigation/native'; // 導入 useNavigation 鉤子
 import TabNavigation from '../../Navigation/TavNavigation'; // 導入 TabNavigation
+import Animated,{FadeIn,FadeInDown,FadeInUp,FadeOut} from 'react-native-reanimated';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -43,7 +44,7 @@ const LoginScreen = () => {
     <View style={styles.container}>
       <ImageBackground source={app} style={styles.backgroundImage}>
         <View style={styles.logoContainer}>
-          <Image source={LOGO} style={styles.logo}></Image>
+          <Animated.Image entering={FadeInUp.delay(200).duration(1000).springify()} source={LOGO} style={styles.logo}></Animated.Image>
         </View>
         <Card style={styles.card}>
           <Text style={styles.welcomeText}>歡迎使用 X-Plore APP!</Text>

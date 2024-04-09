@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
   },
   title: {
     flexWrap: 'wrap',
-    fontSize: 11,
+    fontSize: 12,
+    fontWeight:'bold',
     marginBottom: 5,
     color: COLORS.black,
   },
