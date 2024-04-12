@@ -13,7 +13,7 @@
       },
       {
         "title": "Carousel 1",
-        "image": "https://img.onl/lva6PE"
+        "image": "https://img.onl/cMMHcX"
       }
     ]
   },
@@ -31,7 +31,7 @@
         "image": "https://img.onl/HJCby5"
       },
       {
-        "title": "Blnder3D:次世代遊戲建模:基礎篇",
+        "title": "Blnder3D:次世代遊戲建模",
         "author":"chen yi cheng",
         "stars":"4.7",
         "comment":"(1,652)",
@@ -39,7 +39,7 @@
         "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
       },
       {
-        "title": "Carousel 1",
+        "title": "UE5 < 末日廢墟 >場景教程",
         "author":"yiyi",
         "score": "4.6",
         "stars": 5,
@@ -48,13 +48,30 @@
         "image": "https://img.onl/s457yb"
       },
       {
-        "title": "Carousel 1",
+        "title": "Unreal Engine VR 遊戲開發",
         "author":"quxin",
         "score": "4.6",
         "stars": 5,
         "comment":"(1,902)",
         "price":"FREE",
-        "image": "https://img.onl/s457yb"
+        "image": "https://img.onl/eWdA4W"
+      },  {
+        "title": "Blender : 創造森林村莊場景",
+        "author":"mark",
+        "score": "4.6",
+        "stars": 5,
+        "comment":"(22)",
+        "price":"FREE",
+        "image": "https://img.onl/nZhVj"
+      },
+      {
+        "title": "React : 全攻略報你知",
+        "author":"quxin",
+        "score": "4.6",
+        "stars": 5,
+        "comment":"(12)",
+        "price":"FREE",
+        "image": "https://img.onl/1kGPke"
       }
     ]
   },
@@ -64,17 +81,17 @@
     "horizontal": false,
     "data": [
       {
-        "title": "Unreal Engine 5 :《末日廢墟》",
-        "author":"wen yi jie",
+        "title": "Unreal Engine VR 遊戲開發：打造沉浸式虛擬實境體驗 ",
+        "author":"汩汩",
         "score": "4.6",
         "stars": 3,
         "comment":"(22)",
-        "price":"FREE",
-        "image": "https://img.onl/s457yb"
+        "price":"$420 NTD",
+        "image": "https://img.onl/eWdA4W"
       },
       {
         "title": "React JS | Best React JS Course",
-        "author":"wen yi jie",
+        "author":"Miya",
         "score": "4.6",
         "stars": 4,
         "comment":"(102)",
@@ -82,40 +99,40 @@
         "image": "https://img.onl/yxkDW8"
       },
       {
-        "title": "Carousel 1",
+        "title": "Unreal Engine 4 遊戲開發入門：從零開始學習",
         "author":"wen yi jie",
         "score": "4.6",
         "stars": 5,
         "comment":"(334)",
-        "price":"FREE",
-        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+        "price":"$2,230 NTD",
+        "image": "https://img.onl/tvnf"
       },
       {
-        "title": "Carousel 1",
+        "title": "Unreal Engine 5:製作你的第一個遊戲",
         "author":"quxin",
         "score": "4.6",
         "stars": 5,
-        "comment":"(522)",
-        "price":"FREE",
-        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+        "comment":"(102)",
+        "price":"$120 NTD",
+        "image": "https://img.onl/cMMHcX"
       },
       {
-        "title": "Carousel 1",
+        "title": "Blender : 創造森林村莊場景",
+        "author":"mark",
+        "score": "4.6",
+        "stars": 5,
+        "comment":"(22)",
+        "price":"FREE",
+        "image": "https://img.onl/nZhVj"
+      },
+      {
+        "title": "React : 全攻略報你知",
         "author":"quxin",
         "score": "4.6",
         "stars": 5,
-        "comment":"(522)",
+        "comment":"(12)",
         "price":"FREE",
-        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
-      },
-      {
-        "title": "Carousel 1",
-        "author":"quxin",
-        "score": "4.6",
-        "stars": 5,
-        "comment":"(522)",
-        "price":"FREE",
-        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+        "image": "https://img.onl/1kGPke"
       }
     ]
   },

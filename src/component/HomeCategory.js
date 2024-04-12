@@ -2,11 +2,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { COLORS } from '../../theme';
+import { selectCounter,selectColorMode,toggleColorMode } from "../../src/redux/counterSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const HomeCategory = ({ title, image }) => {
+ //redux
+ const counterValue =useSelector(selectCounter);
+ const colorMode = useSelector(selectColorMode);
+ const dispatch = useDispatch();
+
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: colorMode === 'dark' ? COLORS.black : COLORS.white }]}>
         <Image source={{ uri: image }} style={styles.image} />
           <Text style={styles.title}>{title}</Text>
         

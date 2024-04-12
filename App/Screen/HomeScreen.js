@@ -75,13 +75,13 @@ const HomeScreen = () => {
 
     return (
       <Reanimated.View entering={FadeIn.delay(200).duration(1000)} style={[styles.coursesContainer, index === 2 && styles.horizontalContainer]}>
-        <Text style={styles.sectionTitle}>{courseData.title}</Text>
+        <Text style={[styles.sectionTitle, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{courseData.title}</Text>
         <View style={styles.blueline} />
         <FlatList
           data={courseData.data}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => { }}>
+            <View onPress={() => { }}>
               <VerticalCourseCard
                 title={item.title}
                 image={item.image}
@@ -90,7 +90,7 @@ const HomeScreen = () => {
                 stars={item.stars}
                 comment={item.comment}
               />
-            </TouchableOpacity>
+            </View>
           )}
           horizontal={courseData.horizontal}
           showsHorizontalScrollIndicator={false}
@@ -108,13 +108,13 @@ const HomeScreen = () => {
 
     return (
       <View style={[styles.coursesContainer, index === 2 && styles.horizontalContainer]}>
-        <Text style={styles.sectionTitle}>{courseData.title}</Text>
+        <Text style={[styles.sectionTitle, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{courseData.title}</Text>
         <View style={styles.blueline} />
         <FlatList
           data={courseData.data}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => { }}>
+            <View onPress={() => { }}>
               <Newest
                 title={item.title}
                 image={item.image}
@@ -123,7 +123,7 @@ const HomeScreen = () => {
                 stars={item.stars}
                 comment={item.comment}
               />
-            </TouchableOpacity>
+            </View>
           )}
           horizontal={courseData.horizontal}
           showsHorizontalScrollIndicator={false}
@@ -140,7 +140,7 @@ const HomeScreen = () => {
     }
     return (
       <Reanimated.View entering={FadeInUp.delay(200).duration(1000)} style={styles.coursesContainer}>
-        <Text style={styles.sectionTitle}>{courseData.title}</Text>
+        <Text style={[styles.sectionTitle, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{courseData.title}</Text>
         <View style={styles.blueline} />
         <FlatList
           data={courseData.data}

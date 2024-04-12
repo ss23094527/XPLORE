@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, StyleSheet, TouchableOpacity, Image, Text, Animated } from 'react-native';
 import HomeScreen from '../App/Screen/HomeScreen';
 import CategoryScreen from '../App/Screen/CategoryScreen';
-import LikeScreen from '../App/Screen/LikeScreen';
+import CoursesScreen from '../App/Screen/CoursesScreen';
 import ProfileScreen from '../App/Screen/ProfileScreen';
 import LearnAIScreen from '../App/Screen/LearnAIScreen';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -13,7 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import { FontAwesome } from '@expo/vector-icons';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { COLORS } from '../theme';
-
+import { MaterialIcons } from '@expo/vector-icons';
 import { getCurrentUser } from '../firebase';
 import HomeAcountIcon from '../src/component/HomeAcountIcon';
 import { selectCounter,selectColorMode,toggleColorMode } from "../src/redux/counterSlice";
@@ -89,7 +89,7 @@ function CustomDrawerContent({ navigation, user }) {
   return (
     
     <View style={styles.drawerContainer}>
-      {/* 添加用戶名稱和頭像 */}
+
       {user && (
         
         <View style={styles.userInfoContainer}>
@@ -114,28 +114,28 @@ function CustomDrawerContent({ navigation, user }) {
           label="個人檔案"
           onPress={() => navigation.navigate('我的')}
           icon={({ color, size }) => (
-            <FontAwesome name="user" color={COLORS.primary} size={size} />
+            <FontAwesome name="user" color={COLORS.primary} size={30} />
           )}
         />
         <DrawerItem
           label="設定"
           onPress={() => navigation.navigate('Settings')}
           icon={({ color, size }) => (
-            <FontAwesome name="cog" color={color} size={size} />
+            <FontAwesome name="cog" color={COLORS.primary} size={30} />
           )}
         />
         <DrawerItem
-          label="願望清單"
-          onPress={() => navigation.navigate('願望清單')}
+          label="我的課程"
+          onPress={() => navigation.navigate('我的課程')}
           icon={({ color, size }) => (
-            <FontAwesome name="heart" color={color} size={size} />
+            <MaterialIcons name="ondemand-video" size={30} color={COLORS.primary} />
           )}
         />
         <DrawerItem
           label="登出"
           onPress={() => navigation.navigate('Login')}
           icon={({ color, size }) => (
-            <FontAwesome name="sign-out" color={color} size={size} />
+            <FontAwesome name="sign-out" color={COLORS.primary} size={30} />
           )}
         />
       </DrawerContentScrollView>
@@ -273,17 +273,17 @@ function TabNavigation({ navigation, bgPosition, handlePress }) {
             }}
           />
           <Tab.Screen
-            name="願望清單"
-            component={LikeScreen}
+            name="我的課程"
+            component={CoursesScreen}
             options={{
               tabBarButton: ({ onPress, accessibilityState }) => (
                 <TouchableOpacity onPress={() => { onPress(); handlePress(3); }} activeOpacity={1} style={styles.tabBarButton}>
                   <Image
-                      source={require('../assets/images/favorite.png')}
+                      source={require('../assets/images/course.png')}
                       style={[styles.icon, accessibilityState.selected && styles.iconActive]}
                     />
                     <Text style={[styles.tabBarText, accessibilityState.selected && styles.tabBarActiveText]}>
-                      願望清單
+                      我的課程
                     </Text>
                 </TouchableOpacity>
               ),

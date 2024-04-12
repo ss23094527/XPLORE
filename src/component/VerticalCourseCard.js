@@ -1,23 +1,37 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { COLORS } from '../../theme';
 import StarList from './StarList'; 
-import { selectCounter,selectColorMode,toggleColorMode } from "../../src/redux/counterSlice";
+import { selectCounter, selectColorMode } from "../../src/redux/counterSlice";
 import { useDispatch, useSelector } from 'react-redux';
 
-
 const VerticalCourseCard = ({ author, title, image, price, stars, comment }) => {
-    return (
-      <View style={styles.container}>
+  
+  const [isFavorite, setIsFavorite] = useState(false);
+  const colorMode = useSelector(selectColorMode);
+  const dispatch = useDispatch();
+
+  return (
+      <View style={[styles.container, { backgroundColor: colorMode === 'dark' ? 'rgba(0,0,0,0.5)' : 'transparent' }]}>
+        <TouchableOpacity onPress={() => setIsFavorite(!isFavorite)} style={styles.favoriteButton}>
+          <View style={[styles.favoriteBackground, { backgroundColor: colorMode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)' }]}>
+            <FontAwesome
+              name={isFavorite ? 'heart' : 'heart-o'}
+              size={20}
+              color={isFavorite ? COLORS.primary : COLORS.white}
+            />
+          </View>
+        </TouchableOpacity>
         <Image source={{ uri: image }} style={styles.image} />
         <View style={styles.infoContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.author}>{author}</Text>
+          <Text style={[styles.title, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{title}</Text>
+          <Text style={[styles.author, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{author}</Text>
           <View style={styles.ratingContainer}>
             <StarList stars={stars} />
-            <Text style={styles.comment}>{comment}</Text>
+            <Text style={[styles.comment, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{comment}</Text>
           </View>
-          <Text style={styles.price}>{price}</Text>
+          <Text style={[styles.price, { color: colorMode === 'dark' ? COLORS.white : COLORS.primary }]}>{price}</Text>
         </View>
       </View>
     );
@@ -26,6 +40,9 @@ const VerticalCourseCard = ({ author, title, image, price, stars, comment }) => 
 const styles = StyleSheet.create({
   container: {
     marginRight: 10,
+    borderRadius: 10,
+    overflow: 'hidden',
+    position: 'relative',
   },
   image: {
     width: 160,
@@ -34,6 +51,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     marginTop: 5,
+    padding: 10,
   },
   title: {
     flexWrap: 'wrap',
@@ -62,6 +80,16 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     color: COLORS.black,
     marginBottom: 5,
+  },
+  favoriteButton: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    zIndex: 1,
+  },
+  favoriteBackground: {
+    borderRadius: 100,
+    padding: 5,
   },
 });
 
