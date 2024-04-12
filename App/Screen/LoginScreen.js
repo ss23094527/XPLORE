@@ -178,13 +178,13 @@ const styles = StyleSheet.create({
   divider: {
     flex: 1,
     height: 1,
-    marginTop: 20,
+    marginTop: "20%",
     backgroundColor: '#ccc',
   },
   
   dividerText: {
     marginHorizontal: 10,
-    marginTop: 40,
+    marginTop: "20%",
     fontSize: 12,
     color: '#666',
   },
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   socialLoginContainer: {
+   
     flexDirection: 'row',
     justifyContent: 'center',
     marginBottom: 10,

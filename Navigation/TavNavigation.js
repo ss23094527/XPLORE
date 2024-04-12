@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import  { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, StyleSheet, TouchableOpacity, Image, Text, Animated } from 'react-native';
 import HomeScreen from '../App/Screen/HomeScreen';
@@ -13,12 +14,15 @@ import { FontAwesome } from '@expo/vector-icons';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { COLORS } from '../theme';
 
-import { getCurrentUser } from '../firebase.js';
-
+import { getCurrentUser } from '../firebase';
+import HomeAcountIcon from '../src/component/HomeAcountIcon';
+import { selectCounter,selectColorMode,toggleColorMode } from "../src/redux/counterSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 const Drawer = createDrawerNavigator();
+
 
 
 export default class TavNavigation extends Component {
@@ -68,33 +72,71 @@ export default class TavNavigation extends Component {
 }
 
 function CustomDrawerContent({ navigation, user }) {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = await getCurrentUser();
+        setUserData(user); 
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+    fetchUserData();
+  }, []);
+
   return (
+    
     <View style={styles.drawerContainer}>
       {/* 添加用戶名稱和頭像 */}
       {user && (
+        
         <View style={styles.userInfoContainer}>
-          <Image source={{ uri: user.photoURL }} style={styles.userAvatar} />
-          <Text style={styles.userName}>{user.name}</Text>
+           <HomeAcountIcon  />
+           {userData && (
+            
+            <View style={styles.detailsContainer}>
+              
+              <Text style={styles.username}>{userData.username}</Text>
+           
+            </View>
+          )}
+  
+          {/* <Image source={{ uri: user.photoURL }} style={styles.userAvatar} /> */}
+         
         </View>
       )}
 
       
       <DrawerContentScrollView>
-        <DrawerItem
+      <DrawerItem
           label="個人檔案"
-          onPress={() => navigation.navigate('Profile')}
+          onPress={() => navigation.navigate('我的')}
+          icon={({ color, size }) => (
+            <FontAwesome name="user" color={COLORS.primary} size={size} />
+          )}
         />
         <DrawerItem
           label="設定"
           onPress={() => navigation.navigate('Settings')}
+          icon={({ color, size }) => (
+            <FontAwesome name="cog" color={color} size={size} />
+          )}
         />
         <DrawerItem
           label="願望清單"
-          onPress={() => navigation.navigate('Wishlist')}
+          onPress={() => navigation.navigate('願望清單')}
+          icon={({ color, size }) => (
+            <FontAwesome name="heart" color={color} size={size} />
+          )}
         />
         <DrawerItem
           label="登出"
           onPress={() => navigation.navigate('Login')}
+          icon={({ color, size }) => (
+            <FontAwesome name="sign-out" color={color} size={size} />
+          )}
         />
       </DrawerContentScrollView>
     </View>
@@ -102,8 +144,13 @@ function CustomDrawerContent({ navigation, user }) {
 }
 
 function TabNavigation({ navigation, bgPosition, handlePress }) {
+
+  const counterValue =useSelector(selectCounter);
+  const colorMode = useSelector(selectColorMode);
+  const dispatch = useDispatch();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colorMode === 'dark' ? COLORS.black : COLORS.white }]}>
        {/* DrawerButton */}
        <TouchableOpacity style={styles.drawerIconContainer} onPress={() => navigation.openDrawer()}>
        <Image source={require('../assets/images/drawer.png')} style={styles.drawerIcon} />
@@ -122,11 +169,11 @@ function TabNavigation({ navigation, bgPosition, handlePress }) {
             right: 16,
             left: 16,
             borderRadius: 20,
-            backgroundColor: '#FFFFFF',
+            backgroundColor: colorMode === 'dark' ? COLORS.black : COLORS.white,
             shadowColor: '#000',
             shadowOffset: {
               width: 0,
-              height: -1,
+              height: 1,
             },
             shadowOpacity: 0.27,
             shadowRadius: 4.65,
@@ -272,6 +319,17 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  username: {
+    marginTop:45,
+    marginHorizontal:5,
+    color: COLORS.black,
+    fontSize: 20,
+    alignItems:"center",
+    alignSelf:"center",
+    justifyContent:"center",
+    fontWeight:'bold',
+    
+  },
   tabBarButton: {
     flex: 1,
     justifyContent: 'center',
@@ -283,6 +341,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
+    
     marginTop: 10,
     width: 30,
     height: 30,
@@ -320,6 +379,15 @@ const styles = StyleSheet.create({
     flex: 1,
   
   },
+  usericon: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 40,
+    borderWidth: 2,
+    marginTop: 30,
+    marginLeft: 20,
+    borderColor: COLORS.white,
+  },
 
   drawerIcon: {
     marginTop:10,
@@ -350,9 +418,5 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginRight: 10,
   },
-  userName: {
-    color:COLORS.black,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
+  
 });

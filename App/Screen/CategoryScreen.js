@@ -6,15 +6,20 @@ import carouselData from '../../src/json/carouselData.json';
 import TextButton from '../../src/component/TextButton'; // 引入 TextButton 組件
 import { COLORS } from '../../theme';
 import Category from '../../src/component/Category';
+import { selectCounter,selectColorMode,toggleColorMode } from "../../src/redux/counterSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const CategoryScreen = () => {
   const ScrollViewRef = useRef();
+  const counterValue =useSelector(selectCounter);
+  const colorMode = useSelector(selectColorMode);
+  const dispatch = useDispatch();
 
   function renderTopSearches() {
     return (
       <View style={{ marginTop: 30 }}>
-        <Text style={styles.topsearch}>熱門搜尋</Text>
+        <Text style={[styles.topsearch, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>熱門搜尋</Text>
         <View style={styles.blueline} />
         <FlatList
           horizontal
@@ -48,7 +53,7 @@ const CategoryScreen = () => {
 
   return (
     <View style={styles.coursesContainer}>
-      <Text style={styles.sectionTitle}>{courseData.title}</Text>
+      <Text style={[styles.sectionTitle, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{courseData.title}</Text>
       <View style={styles.blueline} />
       {groupedData.map((group, index) => (
         <View style={styles.categoryRow} key={index}>
@@ -67,7 +72,7 @@ const CategoryScreen = () => {
 }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colorMode === 'dark' ? COLORS.black : COLORS.white }]}>
       <Searchbar />
       <View>
         {/*top searches */}

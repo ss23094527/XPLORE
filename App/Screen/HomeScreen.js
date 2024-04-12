@@ -14,7 +14,8 @@ import ShoppingCartIcon from '../../src/component/ShoppingCartIcon';
 import LottieView from 'lottie-react-native';
 import Reanimated, { FadeIn, FadeInDown, FadeInUp, FadeOut, } from 'react-native-reanimated';
 import SortCategory from '../../src/component/sortCategory';
-
+import { selectCounter,selectColorMode,toggleColorMode } from "../../src/redux/counterSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const HomeScreen = () => {
@@ -26,6 +27,11 @@ const HomeScreen = () => {
     outputRange: [1, 0],
     extrapolate: 'clamp',
   });
+
+  //redux
+  const counterValue =useSelector(selectCounter);
+  const colorMode = useSelector(selectColorMode);
+  const dispatch = useDispatch();
 
   function renderHeader() {
     return (
@@ -172,7 +178,7 @@ const HomeScreen = () => {
           }}
         />
       </Animated.View>
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: colorMode === 'dark' ? COLORS.black : null }]}>
         <ScrollView
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollY } } }],

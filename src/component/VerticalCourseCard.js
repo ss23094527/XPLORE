@@ -2,6 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { COLORS } from '../../theme';
 import StarList from './StarList'; 
+import { selectCounter,selectColorMode,toggleColorMode } from "../../src/redux/counterSlice";
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const VerticalCourseCard = ({ author, title, image, price, stars, comment }) => {
     return (

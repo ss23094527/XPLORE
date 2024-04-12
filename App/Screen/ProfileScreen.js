@@ -5,9 +5,16 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { auth, getCurrentUser } from '../../firebase'; 
 import { ProgressBar } from 'react-native-paper';
 import ProfileValue from '../../src/component/ProfileValue';
+import { selectCounter,selectColorMode,toggleColorMode } from "../../src/redux/counterSlice";
+import { useDispatch, useSelector } from 'react-redux';
+
+
 
 const ProfileScreen = ({ navigation }) => {
   const [userData, setUserData] = useState(null); 
+  const counterValue =useSelector(selectCounter);
+  const colorMode = useSelector(selectColorMode);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Fetch user data when component mounts
@@ -35,11 +42,13 @@ const ProfileScreen = ({ navigation }) => {
   function renderHeader() {
     return (
       <View style={styles.headerContainer}>
-        <Text style={styles.profileText}>
-          PROFILE
-        </Text>
-        <MaterialIcons style={styles.sunIcon} name="wb-sunny" size={30} color={COLORS.primary} />
-      </View>
+      <Text style={[styles.profileText, {color: colorMode === 'dark' ? COLORS.white : COLORS.black} ]}>
+        PROFILE
+      </Text>
+      <TouchableOpacity style={styles.themeButton} onPress={() => dispatch(toggleColorMode())}>
+        <MaterialIcons name="wb-sunny" size={30} color={colorMode === 'dark' ? 'white' : COLORS.primary} />
+      </TouchableOpacity>
+    </View>
     );
   }
 
@@ -103,47 +112,50 @@ const ProfileScreen = ({ navigation }) => {
 
     function renderProfileSection() {
         return (
-            <View style={styles.profileSectionContainer}>
-                <ProfileValue
-                    label="個人資料設定"
-                    value=""
-                    icon={require('../../assets/images/user-duotone.png')}
-                />
-                
-                <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.lightGray }} />
-                <ProfileValue
-                    label="我的課程"
-                    value=""
-                    icon={require('../../assets/images/book-sharp.png')}
-                />
-                <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.lightGray }} />
-                <ProfileValue
-                    label="我的收藏"
-                    value=""
-                    icon={require('../../assets/images/collection.png')}
-                />
-                <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.lightGray }} />
-                <ProfileValue
-                    label="我的購物車"
-                    value=""
-                    icon={require('../../assets/images/cart.png')}
-                />
-            </View>
+          <View style={[styles.profileSectionContainer, {backgroundColor: colorMode === 'dark' ? COLORS.black : COLORS.white}]}>
+          <ProfileValue 
+              label="個人資料設定"
+              value=""
+              icon={require('../../assets/images/user-duotone.png')}
+          />
+          
+          <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.lightGray }} />
+          <ProfileValue
+              label="我的課程"
+              value=""
+              icon={require('../../assets/images/book-sharp.png')}
+          />
+          <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.lightGray }} />
+          <ProfileValue
+              label="我的收藏"
+              value=""
+              icon={require('../../assets/images/collection.png')}
+          />
+          <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.lightGray }} />
+          <ProfileValue
+              label="我的購物車"
+              value=""
+              icon={require('../../assets/images/cart.png')}
+          />
+      </View>
         );
     }
 
     function renderLogout(){
       return(
         <View>
-          <TouchableOpacity style={styles.signInButton} onPress={handleSignOut} >
-            <Text style={styles.signInText}>登出</Text>
+          <TouchableOpacity style={[styles.signInButton,{
+            backgroundColor:colorMode === 'dark' ? COLORS.white : COLORS.primary }]} 
+            onPress={handleSignOut} >
+            <Text style={[styles.signInText,{
+            color:colorMode === 'dark' ? COLORS.black : COLORS.white }]}>登出</Text>
           </TouchableOpacity>
         </View>
       )
     }
 
     return (
-        <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: colorMode === 'dark' ? COLORS.black : COLORS.white }]}>
             {/* Header */}
             {renderHeader()}
 
@@ -175,6 +187,7 @@ const styles = StyleSheet.create({
   profileText: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginTop:'5%',
     marginLeft: 10,
   },
   sunIcon: {
@@ -226,6 +239,7 @@ const styles = StyleSheet.create({
     paddingHorizontal:20,
     borderWidth:1,
     borderRadius:10,
+    backgroundColor:COLORS.white,
     borderColor:COLORS.lightGray,
   },
   signInButton: {
@@ -240,6 +254,12 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  themeButton: {
+    position: 'relative',
+    marginBottom:20,
+    top: 25,
+    right: 25,
   },
 });
 

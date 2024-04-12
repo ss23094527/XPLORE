@@ -17,6 +17,7 @@ const HomeAcountIcon = () => {
 
 const styles = StyleSheet.create({
   container: {
+    
     flexDirection:'row',
     width: 40,
     height: 40,

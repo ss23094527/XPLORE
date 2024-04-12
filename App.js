@@ -10,7 +10,9 @@ import LoginScreen from './App/Screen/LoginScreen';
 import StartScreen from './App/Screen/StartScreen';
 import Navigation from './Navigation/TavNavigation'; 
 import { auth } from './firebase'; 
-
+import {  configureStore,createSlice  } from '@reduxjs/toolkit';
+import { Provider,useDispatch,useSelector } from 'react-redux'; 
+import store from './src/redux/store';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -37,6 +39,7 @@ export default function App() {
   }, []);
 
   return (
+    <Provider store={store}>
     <View style={styles.container}>
       <StatusBar style="auto" />
       <NavigationContainer independent={true}>
@@ -47,6 +50,7 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </View>
+    </Provider>
   );
 }
 
