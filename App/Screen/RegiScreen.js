@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Card, TextInput, Button } from 'react-native-paper';
-import { auth, createUserWithEmailAndPassword, db } from '../../firebase';
+import { auth, createUserWithEmailAndPassword, db,signInWithEmailAndPassword } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import app from './../../assets/images/loginGradient.png';
 import LOGO from './../../assets/images/logo.png';
 import Google from './../../assets/images/google.png';
 import facebook from './../../assets/images/Facebook.png';
 import Animated,{FadeIn,FadeInDown,FadeInUp,FadeOut} from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native'; 
 
 
-
-const RegiScreen = ({ navigation }) => {
+const RegiScreen = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
+  
 
   const handleSignIn = () => {
     navigation.navigate('Login');
@@ -26,17 +28,19 @@ const RegiScreen = ({ navigation }) => {
         alert('請填寫完整資訊');
         return;
       }
-
+  
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
+  
       await addDoc(collection(db, 'users'), {
         uid: user.uid,
         username: username,
         email: email,
       });
-
-      navigation.navigate('Home', { user: user });
+  
+   
+      navigation.navigate('TabNavigation');
+  
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         alert('帳號已註冊過');

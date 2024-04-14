@@ -6,15 +6,15 @@ import app from './../../assets/images/loginGradient.png';
 import LOGO from './../../assets/images/logo.png';
 import Google from './../../assets/images/google.png';
 import facebook from './../../assets/images/Facebook.png';
-import { useNavigation } from '@react-navigation/native'; // 導入 useNavigation 鉤子
-import TabNavigation from '../../Navigation/TavNavigation'; // 導入 TabNavigation
+import { useNavigation } from '@react-navigation/native'; 
+import TabNavigation from '../../Navigation/TavNavigation'; 
 import Animated,{FadeIn,FadeInDown,FadeInUp,FadeOut} from 'react-native-reanimated';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const handleLogin = () => {
     if (!email || !password) {
@@ -28,6 +28,7 @@ const LoginScreen = () => {
         console.log('Logged in with:', user.email);
         setError('');
         // 登入成功後導航至 TabNavigation
+         
         navigation.navigate('TabNavigation');
       })
       .catch(error => {

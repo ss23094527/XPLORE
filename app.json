@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "XPLORE",
-    "slug": "XPLORE",
+    "name": "xplore",
+    "slug": "mid12xplore",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,19 +15,41 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
+    },
+    "extra": {
+      "eas": {
+        "owner": "ntuedtd2024app",
+        "projectId": "74b1dcb4-f0e1-40ba-92b7-72135f4e5d12"
+      }
     },
     "android": {
+      "package": "com.ntuedtd2024app.mid_12_Xplore",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#ffffff",
+        "runtimeVersion": "1.0.0"
+      },
+      "runtimeVersion": "1.0.0"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/74b1dcb4-f0e1-40ba-92b7-72135f4e5d12"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "sdkVersion": "50.0.0",
+    "owner": "ntuedtd2024app"
   }
 }

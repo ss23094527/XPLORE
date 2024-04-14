@@ -13,7 +13,10 @@
       },
       {
         "title": "Carousel 1",
-        "image": "https://img.onl/cMMHcX"
+        "image": "https://img.onl/Z7Gifm"
+      },{
+        "title": "Carousel 1",
+        "image": "https://img.onl/0AreT1"
       }
     ]
   },
@@ -213,42 +216,42 @@
   
   },
   {
-    "title": "熱門推薦",
-    "horizontal": true,
+    "title": "更多教程",
+    "horizontal": false,
     "data": [
       {
-        "title": "Blnder3.2:零基礎新手入門",
-        "author":"wen yi jie",
-        "stars":"5.0",
-        "comment":"(2,402)",
+        "title": "Blnder4.0: 超簡單動畫入門 ",
+        "author":"bibi",
+        "stars":"4.6",
+        "comment":"(2,432)",
         "price":"$1990 NTD",
-        "image": "https://img.onl/HJCby5"
+        "image": "https://img.onl/uFgtiJ"
       },
       {
-        "title": "Blnder3D:次世代遊戲建模:基礎篇",
+        "title": "Unreal Engine 4 遊戲開發入門：從零開始學習",
         "author":"chen yi cheng",
         "stars":"4.7",
         "comment":"(1,652)",
         "price":"FREE",
-        "image": "https://raw.githubusercontent.com/ss23094527/XPLORE/main/assets/images/carosuel03.png"
+        "image": "https://img.onl/YzXpGn"
       },
       {
-        "title": "Carousel 1",
+        "title": "Unreal Engine 5 製作第一個恐怖遊戲",
         "author":"yiyi",
         "score": "4.6",
         "stars": 5,
         "comment":"(2,002)",
         "price":"$690 NTD",
-        "image": "https://img.onl/s457yb"
+        "image": "https://img.onl/2Xy6en"
       },
       {
-        "title": "Carousel 1",
+        "title": "Unreal Engine 5 沙漠神殿場景教程",
         "author":"quxin",
         "score": "4.6",
         "stars": 5,
         "comment":"(1,902)",
-        "price":"FREE",
-        "image": "https://img.onl/s457yb"
+        "price":"$1,399 NTD",
+        "image": "https://img.onl/Z7Gifm"
       }
     ]
   }

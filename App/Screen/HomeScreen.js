@@ -2,7 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { Text, View, StyleSheet, Animated } from 'react-native';
 import { COLORS } from '../../theme';
 import Searchbar from '../../src/component/SearchBar';
-import { ScrollView, FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import {  FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-virtualized-view'
 import Carousel from '../../src/component/MyCarousel';
 import carouselData from '../../src/json/carouselData.json';
 import VerticalCourseCard from '../../src/component/VerticalCourseCard';
@@ -16,6 +17,7 @@ import Reanimated, { FadeIn, FadeInDown, FadeInUp, FadeOut, } from 'react-native
 import SortCategory from '../../src/component/sortCategory';
 import { selectCounter,selectColorMode,toggleColorMode } from "../../src/redux/counterSlice";
 import { useDispatch, useSelector } from 'react-redux';
+import MoreCourses from '../../src/component/MoreCourses';
 
 
 const HomeScreen = () => {
@@ -132,6 +134,39 @@ const HomeScreen = () => {
     );
   }
 
+  function renderMoreCourses(index) {
+    const courseData = carouselData[index];
+
+    if (!courseData) {
+      return null;
+    }
+
+    return (
+      <View style={[styles.coursesContainer, index === 2 && styles.horizontalContainer]}>
+        <Text style={[styles.sectionTitle, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{courseData.title}</Text>
+        <View style={styles.blueline} />
+        <FlatList
+          data={courseData.data}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View onPress={() => { }}>
+              <MoreCourses
+                title={item.title}
+                image={item.image}
+                author={item.author}
+                price={item.price}
+                stars={item.stars}
+                comment={item.comment}
+              />
+            </View>
+          )}
+          horizontal={courseData.horizontal}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+    );
+  }
+
   function renderCategory(index) {
     const courseData = carouselData[index];
 
@@ -203,7 +238,8 @@ const HomeScreen = () => {
           {renderCategory(3)}
           {/* Newest */}
           {renderNewest(2)}
-          
+          {/* MoreCourses */}
+          {renderMoreCourses(6)}
         </ScrollView>
       </View>
     </View>

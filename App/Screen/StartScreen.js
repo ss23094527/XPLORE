@@ -6,7 +6,7 @@ import logo from './../../assets/images/xploreWHITEword.png';
 import LoginScreen from './LoginScreen';
 import RegiScreen from './RegiScreen';
 import HomeScreen from './HomeScreen';
-import APP from '../../App';
+import { useNavigation } from '@react-navigation/native'; 
 import Animated,{FadeIn,FadeInDown,FadeInUp,FadeOut} from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
@@ -14,32 +14,33 @@ const Stack = createStackNavigator();
 export default class StartScreen extends Component {
   render() {
     return (
-      <Stack.Navigator initialRouteName="StartScreen" screenOptions={{ headerShown: false,gestureEnabled: false }}>
-        <Stack.Screen name="StartScreen" component={StartScreenContent} />
+      <Stack.Navigator initialRouteName="StartScreenContent" screenOptions={{ headerShown: false,gestureEnabled: false }}>
+        <Stack.Screen name="StartScreenContent" component={StartScreenContent} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegiScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="APP" component={APP} />
+       
       </Stack.Navigator>
     );
   }
 }
 
-class StartScreenContent extends Component {
-  render() {
-    return (
-      <Animated.View entering={FadeInUp.delay(200).duration(1000).springify()} style={styles.container}>
-        <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
-          <Image source={logo} style={styles.logo}></Image>
-          <Text style={styles.Text}>   探索你的學習領域，開啟新世界。</Text>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Login')}>
-            <Text style={styles.buttonText}>Let's GO!</Text>
-          </TouchableOpacity>
-        </ImageBackground>
-      </Animated.View>
-    );
-  }
-}
+const StartScreenContent = () => {
+  const navigation = useNavigation(); 
+
+  return (
+    <Animated.View entering={FadeInUp.delay(200).duration(1000).springify()} style={styles.container}>
+      <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+        <Image source={logo} style={styles.logo} />
+        <Text style={styles.Text}>   探索你的學習領域，開啟新世界。</Text>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.buttonText}>Let's GO!</Text>
+        </TouchableOpacity>
+      </ImageBackground>
+    </Animated.View>
+  );
+};
+
 
 const styles = StyleSheet.create({
   container: {
