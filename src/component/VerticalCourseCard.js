@@ -5,37 +5,44 @@ import { COLORS } from '../../theme';
 import StarList from './StarList'; 
 import { selectCounter, selectColorMode } from "../../src/redux/counterSlice";
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const VerticalCourseCard = ({ author, title, image, price, stars, comment }) => {
-  
   const [isFavorite, setIsFavorite] = useState(false);
   const colorMode = useSelector(selectColorMode);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Detail', { author, title, image, price, stars, comment });
+  };
 
   return (
-      <View style={[styles.container, { backgroundColor: colorMode === 'dark' ? 'rgba(0,0,0,0.5)' : 'transparent' }]}>
-        <TouchableOpacity onPress={() => setIsFavorite(!isFavorite)} style={styles.favoriteButton}>
-          <View style={[styles.favoriteBackground, { backgroundColor: colorMode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)' }]}>
-            <FontAwesome
-              name={isFavorite ? 'heart' : 'heart-o'}
-              size={20}
-              color={isFavorite ? COLORS.primary : COLORS.white}
-            />
-          </View>
-        </TouchableOpacity>
-        <Image source={{ uri: image }} style={styles.image} />
-        <View style={styles.infoContainer}>
-          <Text style={[styles.title, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{title}</Text>
-          <Text style={[styles.author, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{author}</Text>
-          <View style={styles.ratingContainer}>
-            <StarList stars={stars} />
-            <Text style={[styles.comment, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{comment}</Text>
-          </View>
-          <Text style={[styles.price, { color: colorMode === 'dark' ? COLORS.white : COLORS.primary }]}>{price}</Text>
+    <View style={[styles.container, { backgroundColor: colorMode === 'dark' ? 'rgba(0,0,0,0.5)' : 'transparent' }]}>
+      <TouchableOpacity style={styles.favoriteButton}>
+        <View style={[styles.favoriteBackground, { backgroundColor: colorMode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)' }]}>
+          <FontAwesome
+            name={isFavorite ? 'heart' : 'heart-o'}
+            size={20}
+            color={isFavorite ? COLORS.primary : COLORS.white}
+          />
         </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handlePress}>
+        <Image source={{ uri: image }} style={styles.image} />
+      </TouchableOpacity>
+      <View style={styles.infoContainer}>
+        <Text style={[styles.title, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{title}</Text>
+        <Text style={[styles.author, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{author}</Text>
+        <View style={styles.ratingContainer}>
+          <StarList stars={stars} />
+          <Text style={[styles.comment, { color: colorMode === 'dark' ? COLORS.white : COLORS.black }]}>{comment}</Text>
+        </View>
+        <Text style={[styles.price, { color: colorMode === 'dark' ? COLORS.white : COLORS.primary }]}>{price}</Text>
       </View>
-    );
-  };
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

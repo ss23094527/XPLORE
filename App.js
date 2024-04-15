@@ -14,22 +14,11 @@ import {  configureStore,createSlice  } from '@reduxjs/toolkit';
 import { Provider,useDispatch,useSelector } from 'react-redux'; 
 import store from './src/redux/store';
 import * as Updates from 'expo-updates';
+import 'react-native-video';
+
 
 export default function App() {
 
-  async function onFetchUpdateAsync() {
-    try {
-      const update = await Updates.checkForUpdateAsync();
-
-      if (update.isAvailable) {
-        await Updates.fetchUpdateAsync();
-        await Updates.reloadAsync();
-      }
-    } catch (error) {
-      // You can also add an alert() to see the error message in case of an error when fetching updates.
-      alert(`Error fetching latest Expo update: ${error}`);
-    }
-  }
 
   const Stack = createStackNavigator();
   const [fontsLoaded, fontError] = useFonts({
@@ -54,9 +43,7 @@ export default function App() {
     return unsubscribe;
   }, []);
 
-  useEffect(()=>{
-    onFetchUpdateAsync()
-  },[])
+ 
 
   return (
     <Provider store={store}>

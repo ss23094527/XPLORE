@@ -7,7 +7,8 @@ import LoginScreen from './LoginScreen';
 import RegiScreen from './RegiScreen';
 import HomeScreen from './HomeScreen';
 import { useNavigation } from '@react-navigation/native'; 
-import Animated,{FadeIn,FadeInDown,FadeInUp,FadeOut} from 'react-native-reanimated';
+import Animated,{FadeIn,FadeInDown,FadeInUp,FadeOut,BounceIn,ZoomIn} from 'react-native-reanimated';
+import DetailScreen from './DetailScreen';
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,7 @@ export default class StartScreen extends Component {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegiScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-       
+        <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>
     );
   }
@@ -31,11 +32,18 @@ const StartScreenContent = () => {
   return (
     <Animated.View entering={FadeInUp.delay(200).duration(1000).springify()} style={styles.container}>
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
-        <Image source={logo} style={styles.logo} />
-        <Text style={styles.Text}>   探索你的學習領域，開啟新世界。</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+      <Animated.View entering={ZoomIn.delay(800).duration(1000).springify()}><Image source={logo} style={styles.logo} /></Animated.View>
+        
+      <Animated.View entering={ZoomIn.delay(1000).duration(1000).springify()}>
+         <Text style={styles.Text}>   探索你的學習領域，開啟新世界。</Text></Animated.View>
+      
+         <Animated.View entering={ZoomIn.delay(1000).duration(1000).springify()}>
+
+         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
           <Text style={styles.buttonText}>Let's GO!</Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
+         </Animated.View>
+      
       </ImageBackground>
     </Animated.View>
   );
