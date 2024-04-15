@@ -1,19 +1,18 @@
 import * as React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Image, Dimensions } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Image ,Button} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { COLORS } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
 import { Video, ResizeMode } from 'expo-av';
-import { ScrollView } from 'react-native-virtualized-view'
 
-const { width, height } = Dimensions.get('window');
 
 const DetailScreen = () => {
-    const navigation = useNavigation();
-    const [isPlaying, setIsPlaying] = React.useState(false);
 
-     // Header
-     function renderHeader() {
+    const navigation = useNavigation();
+ const [showPlayButton, setShowPlayButton] = React.useState(true);
+    const [isPlaying, setIsPlaying] = React.useState(false);
+    // Header
+    function renderHeader() {
         const [activeSegment, setActiveSegment] = React.useState('introduction');
 
         const handleSegmentPress = (segment) => {
@@ -51,8 +50,8 @@ const DetailScreen = () => {
         );
     }
 
-
     // Video
+   
     function renderVideo() {
         const video = React.useRef(null);
         const [status, setStatus] = React.useState({});
@@ -93,23 +92,13 @@ const DetailScreen = () => {
         );
     }
 
+
     return (
         <View style={styles.container}>
-            <ScrollView
-             scrollEventThrottle={16}
-             contentContainerStyle={{ paddingBottom: 150 }}
-             showsVerticalScrollIndicator={false}
-            
-            >
-
             {/* Header */}
             {renderHeader()}
             {/* Video */}
             {renderVideo()}
-             {/* bottom */}
-
-            </ScrollView>
-         
         </View>
     );
 };
@@ -117,48 +106,26 @@ const DetailScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 20,
-    },
-    videoContainer: {
-        flex: 1,
-        position: 'relative',
-     
+   marginTop:20,
+       
     },
     video: {
-        width: width,
-        height: 200
-    },
-    playButton: {
+        alignSelf: 'center',
+        width: 450,
+        height: 200,
+      },
+      playButton: {
         position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: 100,
+       
         justifyContent: 'center',
         alignItems: 'center',
+        top:'20%',
+        left:'42%',
         width: 80,
         height: 80,
-        borderRadius: 40,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        top: '10%',
-        left: '50%',
-        marginLeft: -40, // Adjust for button width
-        marginTop: -30, // Adjust for button height
     },
-    videoInfo: {
-        marginTop: 10,
-        paddingHorizontal: 20,
-    },
-    videoTitle: {
-        fontSize: 22,
-        fontWeight: 'bold',
-    },
-    videoAuthor: {
-        fontSize: 16,
-        color: COLORS.gray,
-    },
-    videoRating: {
-        fontSize: 16,
-        color: COLORS.black,
-        marginTop: 5,
-    },
-  
     header: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -190,6 +157,27 @@ const styles = StyleSheet.create({
     activeSegmentText: {
         color: COLORS.primary,
         fontWeight: 'bold',
+    },
+    videoContainer: {
+        marginTop: 0,
+        paddingHorizontal: 20,
+    },
+  
+    videoInfo: {
+        marginTop: 10,
+    },
+    videoTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    videoAuthor: {
+        fontSize: 16,
+        color: COLORS.gray,
+    },
+    videoRating: {
+        fontSize: 16,
+        color: COLORS.black,
+        marginTop: 5,
     },
 });
 
